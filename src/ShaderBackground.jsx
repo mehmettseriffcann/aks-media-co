@@ -5,6 +5,7 @@ const shaderSource = `
 struct Uniforms {
   resolution: vec2f,
   time: f32,
+  scroll_y: f32,
 };
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 
@@ -46,9 +47,13 @@ fn fbm(p: vec2f) -> f32 {
 
 @fragment fn main(@location(0) uv: vec2f) -> @location(0) vec4f {
   let aspect = uniforms.resolution.x / uniforms.resolution.y;
-  let st = (uv - 0.5) * vec2f(aspect, 1.0);
   
-  let t = uniforms.time * 0.15; // Slow movement
+  // Scroll parallax & zoom effect
+  let scroll = uniforms.scroll_y;
+  let zoom = 1.0 - (scroll * 0.2); // zooms in slightly as you scroll
+  let st = (uv - 0.5) * vec2f(aspect, 1.0) * zoom;
+  
+  let t = (uniforms.time * 0.15) + (scroll * 0.5); // time accelerates based on scroll
   
   // Domain warping for liquid silk effect
   var q = vec2f(0.0);
@@ -62,15 +67,16 @@ fn fbm(p: vec2f) -> f32 {
   let f = fbm(st + r);
   
   let c_obsidian = vec3f(0.04, 0.04, 0.04);
-  let c_ink = vec3f(0.15, 0.12, 0.10); // slightly brighter for contrast
+  let c_ink = vec3f(0.15, 0.12, 0.10);
   let c_terracotta = vec3f(0.79, 0.38, 0.31);
   
   // Mix colors based on fbm values
   var col = mix(c_obsidian, c_ink, clamp((f*f)*4.0, 0.0, 1.0));
   
-  // Add terracotta glow to the fluid edges
+  // Add terracotta glow to the fluid edges, intensity increases slightly with scroll
   let edge = smoothstep(0.3, 0.7, r.x) * smoothstep(0.7, 0.3, r.y);
-  col = mix(col, c_terracotta, edge * 0.4); // more visible glow
+  let intensity = 0.4 + (scroll * 0.3);
+  col = mix(col, c_terracotta, edge * intensity);
   
   return vec4f(col, 1.0);
 }
@@ -94,7 +100,8 @@ export default function ShaderBackground() {
         let t = 0;
         frame(gpu, (f) => {
           t += 0.01;
-          shader.set({ uniforms: { resolution: output.size, time: t } });
+          const scrollY = window.scrollY / window.innerHeight; // Normalized 0..N
+          shader.set({ uniforms: { resolution: output.size, time: t, scroll_y: scrollY } });
           f.pass(output, shader);
         });
         
