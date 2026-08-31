@@ -48,17 +48,17 @@ function App() {
               </linearGradient>
             </defs>
           </svg>
-          <span className="text-nav" style={{ color: 'var(--color-bone-white)', textTransform: 'none' }}>Dala</span>
+          <span className="text-nav" style={{ color: 'var(--color-bone-white)', textTransform: 'none' }}>AKS</span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
           <div style={{ display: 'flex', gap: '24px' }}>
-            <a href="#" className="btn-ghost">Manifesto</a>
-            <a href="#" className="btn-ghost" style={{ color: 'var(--color-ash-gray)' }}>Team</a>
-            <a href="#" className="btn-ghost" style={{ color: 'var(--color-ash-gray)' }}>Blog</a>
+            <a href="#yaklasim" className="btn-ghost">Felsefe</a>
+            <a href="#ekip" className="btn-ghost" style={{ color: 'var(--color-ash-gray)' }}>Zihinler</a>
+            <a href="https://www.instagram.com/aksmedia.co" target="_blank" rel="noreferrer" className="btn-ghost" style={{ color: 'var(--color-ash-gray)' }}>Portfolyo</a>
           </div>
-          <a href="#" className="btn-primary">
-            Request Access
+          <a href="mailto:hello@aksmedia.co" className="btn-primary">
+            Bize Ulaşın
           </a>
         </div>
       </motion.nav>
@@ -71,16 +71,16 @@ function App() {
           </motion.div>
           
           <motion.h1 variants={fadeInUp} className="text-display" style={{ marginTop: '16px', marginBottom: '32px' }}>
-            Unlock<br />collective<br />wisdom.
+            Dijital<br />Sınırları<br />Aşın.
           </motion.h1>
           
           <motion.p variants={fadeInUp} className="text-body" style={{ maxWidth: '480px', marginBottom: '48px', color: 'var(--color-bone-white)' }}>
-            AKS is a modern agency environment where strategy meets distributed intelligence. We strip away the noise to build pure, massive brand signals.
+            AKS Media, gürültünün içinde kaybolmamanız için içerik, strateji ve büyüme odaklı dijital zeka sunar. Markanızı sadece göstermez, hissettiririz.
           </motion.p>
           
           <motion.div variants={fadeInUp}>
-            <a href="#about" className="btn-primary">
-              Discover More
+            <a href="#yaklasim" className="btn-primary">
+              Neler Yapıyoruz?
             </a>
           </motion.div>
         </motion.div>
@@ -91,32 +91,33 @@ function App() {
 
       {/* Section Headline Block (Two-column asymmetric) */}
       <motion.section 
-        id="about"
+        id="yaklasim"
         className="section" 
         initial="hidden" 
         whileInView="visible" 
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        style={{ padding: '8rem 4rem', display: 'flex', gap: '4rem', alignItems: 'flex-start' }}
+        style={{ padding: '8rem 4rem', display: 'flex', gap: '4rem', alignItems: 'flex-start', flexWrap: 'wrap' }}
       >
-        <motion.div variants={fadeInUp} style={{ flex: 1 }}>
+        <motion.div variants={fadeInUp} style={{ flex: 1, minWidth: '300px' }}>
           <h2 className="text-heading-lg" style={{ color: 'var(--color-bone-white)' }}>
-            Content.<br/>
-            Strategy.<br/>
-            Growth.
+            İçerik.<br/>
+            Strateji.<br/>
+            Büyüme.
           </h2>
         </motion.div>
         
-        <motion.div variants={fadeInUp} style={{ flex: 1, paddingTop: '16px' }}>
-          <span className="text-nav" style={{ color: 'var(--color-saffron-spark)', display: 'block', marginBottom: '24px' }}>APPROACH</span>
+        <motion.div variants={fadeInUp} style={{ flex: 1, paddingTop: '16px', minWidth: '300px' }}>
+          <span className="text-nav" style={{ color: 'var(--color-saffron-spark)', display: 'block', marginBottom: '24px' }}>YAKLAŞIMIMIZ</span>
           <p className="text-body" style={{ maxWidth: '520px', color: 'var(--color-silver-mist)' }}>
-            We design content that feels sculptural rather than informational. By trusting scale and tracking over heavy typography or card layouts, we ensure your message floats clearly above the digital void. No borders. No noise. Just pure impact.
+            Bizim için içerik salt bir üretim değil, markanızın geleceğini şekillendiren bir mühendisliktir. Geleneksel ajans kalıplarını ve sınırları (borders) yıkıyoruz. Dijital dünyadaki boşlukta (void), mesajınızın en saf ve en yüksek sesle yankılanmasını sağlıyoruz. 
           </p>
         </motion.div>
       </motion.section>
 
       {/* Team Member Card (Floating) */}
       <motion.section 
+        id="ekip"
         className="section" 
         initial="hidden" 
         whileInView="visible" 
@@ -125,18 +126,17 @@ function App() {
         style={{ padding: '8rem 4rem' }}
       >
         <motion.div variants={fadeInUp} style={{ marginBottom: '6rem' }}>
-          <h2 className="text-heading" style={{ color: 'var(--color-bone-white)' }}>The Minds</h2>
+          <h2 className="text-heading" style={{ color: 'var(--color-bone-white)' }}>Zihinler</h2>
         </motion.div>
         
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px' }}>
           {[
-            { name: 'Mehmet Şerif', role: 'FOUNDER & CEO' },
-            { name: 'Sarah Connor', role: 'HEAD OF STRATEGY' }
+            { name: 'Mehmet Şerif', role: 'KURUCU & CEO', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80' },
+            { name: 'Kreatif Ağ', role: 'YARATICI EKİP', img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80' }
           ].map((member, idx) => (
             <motion.div key={idx} variants={fadeInUp} style={{ background: 'transparent' }}>
               <div style={{ width: '100%', aspectRatio: '3/4', backgroundColor: '#111', borderRadius: 'var(--radius-cards)', marginBottom: '24px', overflow: 'hidden' }}>
-                 {/* Placeholder for portrait, keeping it pure void/dark gray for now if no image */}
-                 <img src={`https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80`} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) contrast(1.2)' }} />
+                 <img src={member.img} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) contrast(1.2)' }} />
               </div>
               <div className="text-caption" style={{ color: 'var(--color-electric-iris)', textTransform: 'uppercase', marginBottom: '8px' }}>
                 {member.role}
@@ -164,18 +164,18 @@ function App() {
         style={{ padding: '8rem 4rem 4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
         <motion.h2 variants={fadeInUp} className="text-heading" style={{ marginBottom: '60px', textAlign: 'center' }}>
-          Enter the void.
+          Dijital uzaya<br/>adım atın.
         </motion.h2>
         
         <motion.div variants={fadeInUp} style={{ display: 'flex', gap: '32px', marginBottom: '120px' }}>
-          <a href="#" className="btn-ghost">Twitter</a>
+          <a href="https://www.instagram.com/aksmedia.co" target="_blank" rel="noreferrer" className="btn-ghost">Instagram</a>
           <a href="#" className="btn-ghost">LinkedIn</a>
-          <a href="#" className="btn-ghost" style={{ color: 'var(--color-saffron-spark)' }}>hello@aksmedia.co</a>
+          <a href="mailto:hello@aksmedia.co" className="btn-ghost" style={{ color: 'var(--color-saffron-spark)' }}>hello@aksmedia.co</a>
         </motion.div>
         
-        <motion.div variants={fadeInUp} className="text-caption" style={{ color: 'var(--color-ash-gray)', width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+        <motion.div variants={fadeInUp} className="text-caption" style={{ color: 'var(--color-ash-gray)', width: '100%', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
           <span>© {new Date().getFullYear()} AKS Media</span>
-          <span>Designed with Dala</span>
+          <span>Designed with Dala Aesthetic</span>
         </motion.div>
       </motion.footer>
     </div>
