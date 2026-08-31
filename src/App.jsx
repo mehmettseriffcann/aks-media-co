@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ShaderBackground from './ShaderBackground';
 import './index.css';
 
 // Restrained Motion: 400–600ms ease-out transitions on opacity and transform only.
 const fadeUp = {
   hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
 };
 
 const staggerContainer = {
@@ -25,7 +26,7 @@ function App() {
     // Slow fade-in of the lockup itself on load
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1200);
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,7 +46,8 @@ function App() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      <ShaderBackground />
       
       {/* Navigation Bar */}
       <motion.nav 
