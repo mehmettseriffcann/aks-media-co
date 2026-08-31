@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, PenTool, TrendingUp, Target, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ShaderBackground from './ShaderBackground';
 import './index.css';
 
 // --- Animation Variants ---
 const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
 };
 
@@ -20,11 +19,6 @@ const staggerContainer = {
   }
 };
 
-const scaleUp = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] } }
-};
-
 function App() {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -36,233 +30,153 @@ function App() {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', overflowX: 'hidden' }}>
       <ShaderBackground />
       
-      {/* Navbar */}
+      {/* Navigation Bar */}
       <motion.nav 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
-        style={{ padding: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 10 }}
+        style={{ padding: '2rem 4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 10 }}
       >
-        <div style={{ 
-          fontFamily: 'var(--font-serif)', 
-          fontSize: '2.5rem', 
-          fontWeight: 600,
-          letterSpacing: '2px',
-          position: 'relative'
-        }}>
-          AKS
-          <span style={{
-            position: 'absolute',
-            bottom: '6px',
-            left: '22px',
-            width: '8px',
-            height: '8px',
-            backgroundColor: 'var(--color-accent)',
-            borderRadius: '50%'
-          }}></span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Small violet triangular logo icon */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L22 20H2L12 2Z" fill="url(#paint0_linear)"/>
+            <defs>
+              <linearGradient id="paint0_linear" x1="12" y1="2" x2="12" y2="20" gradientUnits="userSpaceOnUse">
+                <stop stopColor="var(--color-electric-iris)"/>
+                <stop offset="1" stopColor="var(--color-deep-verdant)"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span className="text-nav" style={{ color: 'var(--color-bone-white)', textTransform: 'none' }}>Dala</span>
         </div>
-        <a href="https://www.instagram.com/aksmedia.co" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', fontWeight: 500, letterSpacing: '1px', transition: 'color 0.3s ease' }}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-          <span className="hide-on-mobile">INSTAGRAM</span>
-        </a>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <a href="#" className="btn-ghost">Manifesto</a>
+            <a href="#" className="btn-ghost" style={{ color: 'var(--color-ash-gray)' }}>Team</a>
+            <a href="#" className="btn-ghost" style={{ color: 'var(--color-ash-gray)' }}>Blog</a>
+          </div>
+          <a href="#" className="btn-primary">
+            Request Access
+          </a>
+        </div>
       </motion.nav>
 
       {/* Hero Section */}
-      <header className="section" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', textAlign: 'center', paddingTop: '10rem', paddingBottom: '10rem', position: 'relative', zIndex: 10 }}>
-        <motion.div variants={staggerContainer} initial="hidden" animate="visible">
-          <motion.h1 variants={fadeInUp} style={{ fontSize: 'clamp(3.5rem, 8vw, 7rem)', marginBottom: '1.5rem', letterSpacing: '-2px', textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
-            Creative Agency
+      <header className="section" style={{ flex: 1, display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0 4rem', position: 'relative', zIndex: 10, minHeight: '80vh' }}>
+        <motion.div variants={staggerContainer} initial="hidden" animate="visible" style={{ flex: 1, maxWidth: '600px' }}>
+          <motion.div variants={fadeInUp}>
+             <span className="text-nav" style={{ color: 'var(--color-saffron-spark)' }}>Creative Agency</span>
+          </motion.div>
+          
+          <motion.h1 variants={fadeInUp} className="text-display" style={{ marginTop: '16px', marginBottom: '32px' }}>
+            Unlock<br />collective<br />wisdom.
           </motion.h1>
-          <motion.p variants={fadeInUp} style={{ fontSize: 'clamp(0.9rem, 1.5vw, 1.25rem)', color: 'var(--color-text-muted)', letterSpacing: '6px', textTransform: 'uppercase', marginBottom: '4rem' }}>
-            İçerik &bull; Strateji &bull; Büyüme
+          
+          <motion.p variants={fadeInUp} className="text-body" style={{ maxWidth: '480px', marginBottom: '48px', color: 'var(--color-bone-white)' }}>
+            AKS is a modern agency environment where strategy meets distributed intelligence. We strip away the noise to build pure, massive brand signals.
           </motion.p>
-          <motion.div variants={fadeInUp} style={{ display: 'flex', justifyContent: 'center' }}>
-            <a href="#hizmetler" style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.75rem',
-              padding: '1.25rem 2.5rem',
-              backgroundColor: 'var(--color-text)',
-              color: 'var(--color-bg)',
-              fontWeight: 600,
-              fontSize: '1.1rem',
-              borderRadius: '4px',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 4px 14px 0 rgba(255,255,255,0.1)'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 6px 20px rgba(255,255,255,0.2)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 14px 0 rgba(255,255,255,0.1)';
-            }}>
-              Neler Yapıyoruz?
-              <ArrowRight size={18} />
+          
+          <motion.div variants={fadeInUp}>
+            <a href="#about" className="btn-primary">
+              Discover More
             </a>
           </motion.div>
         </motion.div>
+        
+        {/* The right half is left empty to let the WebGPU particle constellation dominate */}
+        <div style={{ flex: 1 }}></div>
       </header>
 
-      {/* Marquee Ticker */}
-      <div style={{ backgroundColor: 'var(--color-accent)', color: 'var(--color-text)', padding: '1.5rem 0', overflow: 'hidden', display: 'flex', whiteSpace: 'nowrap' }}>
-        <motion.div 
-          animate={{ x: [0, -1035] }}
-          transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
-          style={{ display: 'flex', gap: '3rem', fontSize: '1.2rem', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase' }}
-        >
-          {Array(8).fill("DİJİTAL PAZARLAMA • İÇERİK ÜRETİMİ • SOSYAL MEDYA YÖNETİMİ • SEO •").map((text, i) => (
-            <span key={i}>{text}</span>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* Services Section */}
+      {/* Section Headline Block (Two-column asymmetric) */}
       <motion.section 
-        id="hizmetler" 
+        id="about"
         className="section" 
         initial="hidden" 
         whileInView="visible" 
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        style={{ padding: '8rem 2rem' }}
+        style={{ padding: '8rem 4rem', display: 'flex', gap: '4rem', alignItems: 'flex-start' }}
       >
-        <motion.div variants={fadeInUp} style={{ textAlign: 'center', marginBottom: '5rem' }}>
-          <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', marginBottom: '1.5rem', letterSpacing: '-1px' }}>Markanızı Büyüten Çözümler</h2>
-          <p style={{ color: 'var(--color-text-muted)', maxWidth: '650px', margin: '0 auto', fontSize: '1.1rem' }}>Modern dijital dünyada gürültüden sıyrılıp dikkat çekmek için gereken tüm stratejik ve yaratıcı silahlar.</p>
+        <motion.div variants={fadeInUp} style={{ flex: 1 }}>
+          <h2 className="text-heading-lg" style={{ color: 'var(--color-bone-white)' }}>
+            Content.<br/>
+            Strategy.<br/>
+            Growth.
+          </h2>
         </motion.div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
-          {/* Service 1 */}
-          <motion.div variants={scaleUp} style={{ padding: '3rem 2rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.03)', transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}
-               onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-15px)'}
-               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '16px', backgroundColor: 'rgba(216, 85, 75, 0.1)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-              <PenTool size={28} />
-            </div>
-            <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontFamily: 'var(--font-serif)' }}>İçerik Üretimi</h3>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', lineHeight: 1.8 }}>Markanızın ruhunu yansıtan, hedef kitlenizin kaydırmayı bırakmasını sağlayacak dikkat çekici ve estetik içerikler tasarlıyoruz.</p>
-          </motion.div>
-
-          {/* Service 2 */}
-          <motion.div variants={scaleUp} style={{ padding: '3rem 2rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.03)', transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}
-               onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-15px)'}
-               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '16px', backgroundColor: 'rgba(216, 85, 75, 0.1)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-              <Target size={28} />
-            </div>
-            <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontFamily: 'var(--font-serif)' }}>Strateji</h3>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', lineHeight: 1.8 }}>Sadece estetik değil, verilere dayanan, ölçülebilir ve markanızı rakiplerinizden ayıracak uzun vadeli yol haritaları çiziyoruz.</p>
-          </motion.div>
-
-          {/* Service 3 */}
-          <motion.div variants={scaleUp} style={{ padding: '3rem 2rem', backgroundColor: 'var(--color-bg-light)', borderRadius: '24px', border: '1px solid rgba(255,255,255,0.03)', transition: 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)' }}
-               onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-15px)'}
-               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '16px', backgroundColor: 'rgba(216, 85, 75, 0.1)', color: 'var(--color-accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
-              <TrendingUp size={28} />
-            </div>
-            <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem', fontFamily: 'var(--font-serif)' }}>Büyüme</h3>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem', lineHeight: 1.8 }}>Etkileşimi doğrudan satışa dönüştüren performans pazarlama ve büyüme (growth) taktikleriyle markanızın hacmini katlıyoruz.</p>
-          </motion.div>
-        </div>
+        
+        <motion.div variants={fadeInUp} style={{ flex: 1, paddingTop: '16px' }}>
+          <span className="text-nav" style={{ color: 'var(--color-saffron-spark)', display: 'block', marginBottom: '24px' }}>APPROACH</span>
+          <p className="text-body" style={{ maxWidth: '520px', color: 'var(--color-silver-mist)' }}>
+            We design content that feels sculptural rather than informational. By trusting scale and tracking over heavy typography or card layouts, we ensure your message floats clearly above the digital void. No borders. No noise. Just pure impact.
+          </p>
+        </motion.div>
       </motion.section>
 
-      {/* Stats Section */}
-      <motion.section 
-        initial="hidden" 
-        whileInView="visible" 
-        viewport={{ once: true, margin: "-50px" }}
-        variants={staggerContainer}
-        style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: '#050505', padding: '4rem 2rem' }}
-      >
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around', alignItems: 'center', maxWidth: '1200px', margin: '0 auto', gap: '2rem' }}>
-          <motion.div variants={fadeInUp} style={{ textAlign: 'center' }}>
-            <h4 style={{ fontSize: '3rem', fontFamily: 'var(--font-serif)', color: 'var(--color-text)' }}>50+</h4>
-            <p style={{ color: 'var(--color-text-muted)', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem' }}>Mutlu Marka</p>
-          </motion.div>
-          <motion.div variants={fadeInUp} style={{ textAlign: 'center' }}>
-            <h4 style={{ fontSize: '3rem', fontFamily: 'var(--font-serif)', color: 'var(--color-text)' }}>10M+</h4>
-            <p style={{ color: 'var(--color-text-muted)', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem' }}>Aylık Etkileşim</p>
-          </motion.div>
-          <motion.div variants={fadeInUp} style={{ textAlign: 'center' }}>
-            <h4 style={{ fontSize: '3rem', fontFamily: 'var(--font-serif)', color: 'var(--color-accent)' }}>360&deg;</h4>
-            <p style={{ color: 'var(--color-text-muted)', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.85rem' }}>Dijital Çözüm</p>
-          </motion.div>
-        </div>
-      </motion.section>
-
-      {/* Portfolio / Works Section */}
+      {/* Team Member Card (Floating) */}
       <motion.section 
         className="section" 
         initial="hidden" 
         whileInView="visible" 
         viewport={{ once: true, margin: "-100px" }}
         variants={staggerContainer}
-        style={{ padding: '8rem 2rem' }}
+        style={{ padding: '8rem 4rem' }}
       >
-        <motion.div variants={fadeInUp} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', flexWrap: 'wrap', gap: '2rem' }}>
-          <div>
-            <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3rem)', letterSpacing: '-1px' }}>Öne Çıkan Çalışmalar</h2>
-          </div>
-          <a href="https://www.instagram.com/aksmedia.co" target="_blank" rel="noreferrer" style={{ color: 'var(--color-text-muted)', borderBottom: '1px solid var(--color-text-muted)', paddingBottom: '4px', fontSize: '1rem', transition: 'all 0.3s ease' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--color-text)'; e.currentTarget.style.borderColor = 'var(--color-text)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-text-muted)'; e.currentTarget.style.borderColor = 'var(--color-text-muted)'; }}>
-            Tümünü Instagram'da Gör
-          </a>
+        <motion.div variants={fadeInUp} style={{ marginBottom: '6rem' }}>
+          <h2 className="text-heading" style={{ color: 'var(--color-bone-white)' }}>The Minds</h2>
         </motion.div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px' }}>
           {[
-            { img: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800', title: 'Mimari Konsept Tasarımı' },
-            { img: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800', title: 'Ürün Prodüksiyonu' },
-            { img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?auto=format&fit=crop&q=80&w=800', title: 'Sosyal Medya Yönetimi' }
-          ].map((item, index) => (
-            <motion.div key={index} variants={scaleUp} style={{ position: 'relative', borderRadius: '16px', overflow: 'hidden', aspectRatio: '4/5', cursor: 'pointer', group: 'true' }}>
-              <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(0,0,0,0.2)', transition: 'background-color 0.5s ease', zIndex: 1 }} className="hover-overlay" />
-              <img src={item.img} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.7s ease' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.05)'; e.currentTarget.previousSibling.style.backgroundColor = 'rgba(0,0,0,0.6)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.previousSibling.style.backgroundColor = 'rgba(0,0,0,0.2)'; }} />
-              <div style={{ position: 'absolute', bottom: '2rem', left: '2rem', zIndex: 2, pointerEvents: 'none' }}>
-                <h3 style={{ fontSize: '1.5rem', fontFamily: 'var(--font-serif)', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>{item.title}</h3>
+            { name: 'Mehmet Şerif', role: 'FOUNDER & CEO' },
+            { name: 'Sarah Connor', role: 'HEAD OF STRATEGY' }
+          ].map((member, idx) => (
+            <motion.div key={idx} variants={fadeInUp} style={{ background: 'transparent' }}>
+              <div style={{ width: '100%', aspectRatio: '3/4', backgroundColor: '#111', borderRadius: 'var(--radius-cards)', marginBottom: '24px', overflow: 'hidden' }}>
+                 {/* Placeholder for portrait, keeping it pure void/dark gray for now if no image */}
+                 <img src={`https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80`} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'grayscale(100%) contrast(1.2)' }} />
+              </div>
+              <div className="text-caption" style={{ color: 'var(--color-electric-iris)', textTransform: 'uppercase', marginBottom: '8px' }}>
+                {member.role}
+              </div>
+              <div className="text-heading-xs" style={{ color: 'var(--color-bone-white)' }}>
+                {member.name}
               </div>
             </motion.div>
           ))}
         </div>
+        
+        {/* Carousel Indicators */}
+        <motion.div variants={fadeInUp} style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '60px' }}>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-electric-iris)' }}></div>
+          <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.2)' }}></div>
+        </motion.div>
       </motion.section>
 
-      {/* Footer / CTA Section */}
+      {/* Footer Block */}
       <motion.footer 
         initial="hidden" 
         whileInView="visible" 
         viewport={{ once: true }}
         variants={staggerContainer}
-        style={{ padding: '8rem 2rem 4rem', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.05)', marginTop: 'auto', backgroundColor: '#050505', position: 'relative' }}
+        style={{ padding: '8rem 4rem 4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-        <motion.h2 variants={fadeInUp} style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '2.5rem', fontFamily: 'var(--font-serif)', letterSpacing: '-1px' }}>
-          Hikayenizi Birlikte<br/>Yazalım
+        <motion.h2 variants={fadeInUp} className="text-heading" style={{ marginBottom: '60px', textAlign: 'center' }}>
+          Enter the void.
         </motion.h2>
-        <motion.div variants={fadeInUp}>
-          <a href="mailto:hello@aksmedia.co" style={{
-            display: 'inline-flex',
-            fontSize: '1.5rem',
-            color: 'var(--color-accent)',
-            borderBottom: '2px solid var(--color-accent)',
-            paddingBottom: '8px',
-            marginBottom: '6rem',
-            fontWeight: 500,
-            transition: 'all 0.3s ease'
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#fff'; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--color-accent)'; e.currentTarget.style.borderColor = 'var(--color-accent)'; }}>
-            hello@aksmedia.co
-          </a>
+        
+        <motion.div variants={fadeInUp} style={{ display: 'flex', gap: '32px', marginBottom: '120px' }}>
+          <a href="#" className="btn-ghost">Twitter</a>
+          <a href="#" className="btn-ghost">LinkedIn</a>
+          <a href="#" className="btn-ghost" style={{ color: 'var(--color-saffron-spark)' }}>hello@aksmedia.co</a>
         </motion.div>
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', maxWidth: '1200px', margin: '0 auto', color: 'var(--color-text-muted)', fontSize: '0.9rem', flexWrap: 'wrap', gap: '1rem' }}>
-          <span>&copy; {new Date().getFullYear()} AKS Media. Tüm Hakları Saklıdır.</span>
-          <a href="https://www.instagram.com/aksmedia.co" target="_blank" rel="noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', transition: 'color 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = '#fff'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-muted)'}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            <span>@aksmedia.co</span>
-          </a>
-        </div>
+        <motion.div variants={fadeInUp} className="text-caption" style={{ color: 'var(--color-ash-gray)', width: '100%', display: 'flex', justifyContent: 'space-between' }}>
+          <span>© {new Date().getFullYear()} AKS Media</span>
+          <span>Designed with Dala</span>
+        </motion.div>
       </motion.footer>
     </div>
   );
