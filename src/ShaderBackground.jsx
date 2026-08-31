@@ -6,7 +6,7 @@ struct Uniforms {
   resolution: vec2f,
   time: f32,
 };
-@group(0) @binding(0) var<uniform> u: Uniforms;
+@group(0) @binding(0) var<uniform> uniforms: Uniforms;
 
 // Hash for noise
 fn hash(p: vec2f) -> f32 {
@@ -45,10 +45,10 @@ fn fbm(p: vec2f) -> f32 {
 }
 
 @fragment fn main(@location(0) uv: vec2f) -> @location(0) vec4f {
-  let aspect = u.resolution.x / u.resolution.y;
+  let aspect = uniforms.resolution.x / uniforms.resolution.y;
   let st = (uv - 0.5) * vec2f(aspect, 1.0);
   
-  let t = u.time * 0.15; // Slow movement
+  let t = uniforms.time * 0.15; // Slow movement
   
   // Domain warping for liquid silk effect
   var q = vec2f(0.0);
@@ -61,21 +61,16 @@ fn fbm(p: vec2f) -> f32 {
   
   let f = fbm(st + r);
   
-  // Colors mapped from Dala style
-  // Obsidian: #0a0a0a -> (0.04, 0.04, 0.04)
-  // Ink Surface: #161311 -> (0.09, 0.07, 0.07)
-  // Terracotta: #c9604f -> (0.79, 0.38, 0.31)
-  
   let c_obsidian = vec3f(0.04, 0.04, 0.04);
-  let c_ink = vec3f(0.09, 0.07, 0.07);
+  let c_ink = vec3f(0.15, 0.12, 0.10); // slightly brighter for contrast
   let c_terracotta = vec3f(0.79, 0.38, 0.31);
   
   // Mix colors based on fbm values
   var col = mix(c_obsidian, c_ink, clamp((f*f)*4.0, 0.0, 1.0));
   
-  // Add a very subtle terracotta glow to the edges of the silk
-  let edge = smoothstep(0.4, 0.6, r.x) * smoothstep(0.6, 0.4, r.y);
-  col = mix(col, c_terracotta, edge * 0.15); // extremely subtle!
+  // Add terracotta glow to the fluid edges
+  let edge = smoothstep(0.3, 0.7, r.x) * smoothstep(0.7, 0.3, r.y);
+  col = mix(col, c_terracotta, edge * 0.4); // more visible glow
   
   return vec4f(col, 1.0);
 }
@@ -118,11 +113,11 @@ export default function ShaderBackground() {
 
   return (
     <div style={{
-      position: 'absolute',
+      position: 'fixed',
       top: 0,
       left: 0,
-      width: '100%',
-      height: '100%',
+      width: '100vw',
+      height: '100vh',
       zIndex: -1,
       overflow: 'hidden',
       pointerEvents: 'none'
